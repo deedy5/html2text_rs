@@ -1,0 +1,22 @@
+[package]
+name = "html2text_rs"
+version = "0.1.0"
+edition = "2021"
+description = "Convert HTML to markdown or plain text"
+authors = ["deedy5"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "html2text_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22", features = ["extension-module", "abi3-py38"] }
+html2text = "0.12"
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+opt-level = 3
+panic = "abort"
+strip = "symbols"
