@@ -9,7 +9,8 @@ Python binding to the rust [rust-html2text](https://github.com/jugglerchris/rust
 - [Installation](#installation)
 - [Usage](#usage)
   - [text_markdown()](#1-text_markdown)
-  - [text_plain()](#2-text_plain) 
+  - [text_plain()](#2-text_plain)
+  - [text_rich()](#3-text_rich)
 
 ## Installation
 
@@ -29,12 +30,12 @@ def text_markdown(html: str, width: int = 100):
 
     """
 ```
-*example*
+example:
 ```python
 import html2text_rs
 import requests
 
-resp = requests.get("https://tmz.com")
+resp = requests.get("https://en.wikipedia.org/wiki/AGM-88_HARM")
 
 text_markdown = html2text_rs.text_markdown(resp.text)
 print(text_markdown)
@@ -50,13 +51,34 @@ def text_plain(html: str, width: int = 100):
 
     """
 ```
-*example*
+example:
 ```python
 import html2text_rs
 import requests
 
-resp = requests.get("https://tmz.com")
+resp = requests.get("https://en.wikipedia.org/wiki/AGM-88_HARM")
 
 text_plain = html2text_rs.text_plain(resp.text)
 print(text_plain)
+```
+### 3. text_rich()
+```python
+def text_rich(html: str, width: int = 100):
+    """Convert HTML to rich text.
+
+    Args:
+        html (str): input html text.
+        width (int): wrap text to width columns. Default is 100.
+
+    """
+```
+example:
+```python
+import html2text_rs
+import requests
+
+resp = requests.get("https://en.wikipedia.org/wiki/AGM-88_HARM")
+
+text_rich = html2text_rs.text_rich(resp.text)
+print(text_rich)
 ```
