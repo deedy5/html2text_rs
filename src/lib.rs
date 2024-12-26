@@ -1,6 +1,6 @@
 use html2text::{
     from_read, from_read_with_decorator,
-    render::text_renderer::{RichDecorator, TrivialDecorator},
+    render::{RichDecorator, TrivialDecorator},
 };
 use pyo3::prelude::*;
 
@@ -8,7 +8,9 @@ use pyo3::prelude::*;
 #[pyfunction]
 #[pyo3(signature=(html, width=100))]
 fn text_markdown(html: String, width: usize, py: Python) -> PyResult<String> {
-    let text = py.allow_threads(|| from_read(html.as_bytes(), width));
+    let text = py
+        .allow_threads(|| from_read(html.as_bytes(), width))
+        .expect("Error when extracting markdown text");
     Ok(text)
 }
 
@@ -16,9 +18,9 @@ fn text_markdown(html: String, width: usize, py: Python) -> PyResult<String> {
 #[pyfunction]
 #[pyo3(signature=(html, width=100))]
 fn text_plain(html: String, width: usize, py: Python) -> PyResult<String> {
-    let text = py.allow_threads(|| {
-        from_read_with_decorator(html.as_bytes(), width, TrivialDecorator::new())
-    });
+    let text = py
+        .allow_threads(|| from_read_with_decorator(html.as_bytes(), width, TrivialDecorator::new()))
+        .expect("Error when extracting plain text");
     Ok(text)
 }
 
@@ -26,8 +28,9 @@ fn text_plain(html: String, width: usize, py: Python) -> PyResult<String> {
 #[pyfunction]
 #[pyo3(signature=(html, width=100))]
 fn text_rich(html: String, width: usize, py: Python) -> PyResult<String> {
-    let text =
-        py.allow_threads(|| from_read_with_decorator(html.as_bytes(), width, RichDecorator::new()));
+    let text = py
+        .allow_threads(|| from_read_with_decorator(html.as_bytes(), width, RichDecorator::new()))
+        .expect("Error when extracting rich text");
     Ok(text)
 }
 
