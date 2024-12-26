@@ -1,6 +1,6 @@
 [package]
 name = "html2text_rs"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 description = "Convert HTML to markdown or plain text"
 authors = ["deedy5"]
