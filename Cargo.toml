@@ -12,7 +12,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = { version = "0.24.1", features = ["extension-module", "abi3-py38", "generate-import-lib"] }
-html2text = "0.14.2"
+html2text = "0.14.3"
 
 [profile.release]
 codegen-units = 1
